@@ -1,7 +1,5 @@
 package com.plcoding.cryptotracker.crypto.domain
 
-import com.plcoding.cryptotracker.crypto.presentation.models.CoinUi
-
 data class Coin(
     val id: String,
     val rank: Int,
