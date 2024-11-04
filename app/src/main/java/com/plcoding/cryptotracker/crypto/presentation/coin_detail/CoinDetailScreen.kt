@@ -150,7 +150,9 @@ fun CoinDetailScreen(
                     dataPoints = coin.coinPriceHistory,
                     style = ChartStyle(
                         chartLineColor = MaterialTheme.colorScheme.primary,
-                        unselectedColor = MaterialTheme.colorScheme.secondary,
+                        unselectedColor = MaterialTheme.colorScheme.secondary.copy(
+                            alpha = 0.3f
+                        ),
                         selectedColor = MaterialTheme.colorScheme.primary,
                         helperLinesThicknessPx = 5f,
                         axisLinesThicknessPx = 5f,
