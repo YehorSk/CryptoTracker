@@ -54,6 +54,10 @@ fun AdaptiveCoinListDetailPane(
                                     pane = ListDetailPaneScaffoldRole.Detail
                                 )
                             }
+
+                            is CoinListAction.OnSearch -> {
+
+                            }
                         }
                     }
                 )

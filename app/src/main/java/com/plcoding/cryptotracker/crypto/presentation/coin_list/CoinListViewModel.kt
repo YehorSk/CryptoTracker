@@ -11,8 +11,6 @@ import com.plcoding.cryptotracker.crypto.presentation.models.toCoinUi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -42,6 +40,20 @@ class CoinListViewModel(
             is CoinListAction.OnCoinClick -> {
                 selectCoin(action.coinUi)
             }
+
+            is CoinListAction.OnSearch -> {
+                searchCoins(action.query)
+            }
+        }
+    }
+
+    private fun searchCoins(query: String){
+        _state.update { state ->
+            state.copy(
+                displayCoins = state.mainCoins.filter {
+                    coins -> coins.name.contains(query, ignoreCase = true) || coins.symbol.contains(query, ignoreCase = true)
+                }
+            )
         }
     }
 
@@ -94,7 +106,8 @@ class CoinListViewModel(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            coins = coins.map { it.toCoinUi() },
+                            mainCoins = coins.map { it.toCoinUi() },
+                            displayCoins = coins.map { it.toCoinUi() },
                         )
                     }
                 }
